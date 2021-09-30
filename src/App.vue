@@ -1,5 +1,5 @@
 <template>
-   <div class="container">
+  <div class="container">
     <CBox
       v-bind="mainStyles[colorMode]"
       d="flex"
@@ -51,14 +51,6 @@
           mt="3"
           @click="showModal = true"
         >Delete Account</CButton>
-        <c-link
-          as="router-link"
-          href="/arbol"
-        >
-          <CHeading as="h4">
-            Árbol
-          </CHeading>
-        </c-link>
         <CModal :is-open="showModal">
           <CModalOverlay/>
           <CModalContent>
@@ -78,28 +70,27 @@
 
 <script>
 import {
-    CBox,
-    CButton,
-    CAvatarGroup,
-    CAvatar,
-    CAvatarBadge,
-    CModal,
-    CModalContent,
-    CModalOverlay,
-    CModalHeader,
-    CModalFooter,
-    CModalBody,
-    CModalCloseButton,
-    CIconButton,
-    CFlex,
-    CHeading,
-    CLink,
+  CBox,
+  CButton,
+  CAvatarGroup,
+  CAvatar,
+  CAvatarBadge,
+  CModal,
+  CModalContent,
+  CModalOverlay,
+  CModalHeader,
+  CModalFooter,
+  CModalBody,
+  CModalCloseButton,
+  CIconButton,
+  CFlex,
+  CHeading,
 } from "@chakra-ui/vue";
 
 export default {
-    name: 'grafica-arbol',
-    inject: ['$chakraColorMode', '$toggleColorMode'],
-    components: {
+  name: "App",
+  inject: ["$chakraColorMode", "$toggleColorMode"],
+  components: {
     CBox,
     CButton,
     CAvatarGroup,
@@ -115,7 +106,6 @@ export default {
     CIconButton,
     CFlex,
     CHeading,
-    CLink
   },
   data() {
     return {
@@ -154,5 +144,5 @@ export default {
       });
     }
   }
-}
+};
 </script>

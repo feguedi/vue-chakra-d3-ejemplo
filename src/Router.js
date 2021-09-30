@@ -4,21 +4,28 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 const router = new Router({
-    base: process.env.BASE_URL,
+    // base: process.env.BASE_URL,
     routes: [{
         path: '/',
-        name: 'inicio',
-        component: () => import(/* webpackChunkName: "App" */'./App.vue'),
-        meta: {
-            title: 'Inicio',
-        },
+        redirect: 'inicio',
     }, {
-        path: '/arbol',
-        name: 'arbol',
-        component: () => import(/* webpackChunkName: "Arbol" */'./views/Arbol.vue'),
-        meta: {
-            title: 'Árbol',
-        },
+        path: '/home',
+        name: 'inicio',
+        component: () => import(/* webpackChunkName: "MainLayout" */'./layouts/Main.vue'),
+        children: [{
+            path: '/app',
+            component: () => import(/* webpackChunkName: "App" */'./App.vue'),
+            meta: {
+                title: 'Inicio',
+            },
+        }, {
+            path: '/arbol',
+            name: 'arbol',
+            component: () => import(/* webpackChunkName: "Arbol" */'./views/Arbol.vue'),
+            meta: {
+                title: 'Árbol',
+            }
+        }]
     }, {
         path: '*',
         name: 'notfound',
