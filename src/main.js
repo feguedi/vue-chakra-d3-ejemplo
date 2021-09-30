@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
 import router from './Router';
 import Chakra, {
@@ -7,7 +7,15 @@ import Chakra, {
     CThemeProvider
 } from '@chakra-ui/vue';
 
-Vue.use(Chakra, {
+createApp({
+    // render: (h) => h(App),
+    render: (h) => h(CThemeProvider, [
+        h(CColorModeProvider, [
+            h(CReset),
+            h(App),
+        ]),
+    ]),
+}).use(router).use(Chakra, {
     extendTheme: {},
     icons: {
         iconPack: 'fa',
@@ -19,17 +27,4 @@ Vue.use(Chakra, {
             // }
         },
     },
-});
-
-Vue.config.productionTip = false;
-
-new Vue({
-    router,
-    // render: (h) => h(App),
-    render: (h) => h(CThemeProvider, [
-        h(CColorModeProvider, [
-            h(CReset),
-            h(App),
-        ]),
-    ]),
 }).$mount('#app');

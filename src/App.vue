@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <main-layout>
     <CBox
       v-bind="mainStyles[colorMode]"
       d="flex"
@@ -65,10 +65,11 @@
         </CModal>
       </CFlex>
     </CBox>
-  </div>
+  </main-layout>
 </template>
 
 <script>
+import MainLayout from './layouts/Main.vue';
 import {
   CBox,
   CButton,
@@ -91,6 +92,7 @@ export default {
   name: "App",
   inject: ["$chakraColorMode", "$toggleColorMode"],
   components: {
+    MainLayout,
     CBox,
     CButton,
     CAvatarGroup,
