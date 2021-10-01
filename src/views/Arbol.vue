@@ -1,15 +1,12 @@
 <template>
-  <main-layout>
-    <CFlex>
-      <CBox>
-        <CHeading as="h2">Mi árbol de gráficas</CHeading>
-      </CBox>
-    </CFlex>
-  </main-layout>
+  <CFlex>
+    <CBox>
+      <CHeading as="h2">Mi árbol de gráficas</CHeading>
+    </CBox>
+  </CFlex>
 </template>
 
 <script>
-import MainLayout from '../layouts/Main.vue';
 import {
   CFlex,
   CBox,
@@ -19,13 +16,12 @@ import {
 export default {
   name: 'arbol',
   components: {
-    MainLayout,
     CFlex,
     CBox,
     CHeading,
   },
-  mounted () {
+  mounted() {
     console.log('Montado');
-  }
-}
+  },
+};
 </script>

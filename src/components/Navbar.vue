@@ -6,6 +6,7 @@
     d="flex"
     align-items="center"
     shadow="sm"
+    :bg="'cyan'"
   >
     <CBadge
       variant-color="vue"
@@ -36,7 +37,7 @@
           variant-color="gray"
           :aria-label="'Cambiar a modo ' + colorMode === 'light' ? 'oscuro' : 'claro'"
           :icon="colorMode === 'light' ? 'moon' : 'sun'"
-          @click="$toggleColorMode"
+          @click="toggleColorMode"
         />
       </CBox>
     </CBox>
@@ -47,7 +48,7 @@
 import {
   CBox,
   CIconButton,
-  CBadge
+  CBadge,
 } from '@chakra-ui/vue';
 
 export default {
@@ -62,16 +63,25 @@ export default {
     colorMode() {
       return this.$chakraColorMode();
     },
+    theme() {
+      return this.$chakraTheme();
+    },
+    toggleColorMode() {
+      console.log('========================');
+      console.log('Demando camriar el color');
+      console.log('========================');
+      return this.$toggleColorMode;
+    },
   },
   watch: {
-    colorMode (newVal) {
+    colorMode(newVal) {
       if (!process.client) { return; }
       try {
         localStorage.setItem('chakra_color_mode', newVal);
       } catch (error) {
         console.error(error);
       }
-    }
+    },
   },
   created() {
     if (!process.client) { return; }
@@ -79,12 +89,13 @@ export default {
       const savedColorMode = localStorage.getItem('chakra_color_mode');
       if (!savedColorMode) { return; }
 
-      if ((savedColorMode && this.colorMode) && (this.colorMode !== savedColorMode))
+      if ((savedColorMode && this.colorMode) && (this.colorMode !== savedColorMode)) {
         this.$toggleColorMode();
+      }
     } catch (error) {
       console.error(error);
     }
-  }
+  },
 };
 </script>
 

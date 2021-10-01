@@ -1,150 +1,57 @@
 <template>
-  <main-layout>
-    <CBox
-      v-bind="mainStyles[colorMode]"
-      d="flex"
-      w="100vw"
-      h="100vh"
-      flex-dir="column"
-      justify-content="center"
-    >
-      <CHeading textAlign="center" mb="4">⚡️ Hello chakra-ui/vue</CHeading>
-      <CFlex justify="center" direction="column" align="center">
-        <CBox mb="3">
-          <CIconButton
-            mr="3"
-            :icon="colorMode === 'light' ? 'moon' : 'sun'"
-            @click="toggleColorMode"
-            :aria-label="`Switch to ${colorMode === 'light' ? 'dark' : 'light'} mode`"
-          />
-          <CButton left-icon="info" variant-color="blue" @click="showToast">Show Toast</CButton>
+  <transition mode="out-in" name="fade">
+    <div class="container">
+      <CBox
+        font-family="body"
+        as="main"
+        :bg="colorMode === 'light' ? 'white' : 'gray.800'"
+        :color="colorMode === 'light' ? 'gray.800' : 'gray.50'"
+      >
+        <Navbar />
+        <CBox as="main" :px="[4, 10, '12rem']" :bg="'red'">
+            <router-view/>
         </CBox>
-        <CAvatarGroup>
-          <CAvatar
-            name="Evan You"
-            alt="Evan You"
-            src="https://pbs.twimg.com/profile_images/1206997998900850688/cTXTQiHm_400x400.jpg"
-          >
-            <CAvatarBadge size="1.0em" bg="green.500"/>
-          </CAvatar>
-          <CAvatar
-            name="Jonathan Bakebwa"
-            alt="Jonathan Bakebwa"
-            src="https://res.cloudinary.com/xtellar/image/upload/v1572857445/me_zqos4e.jpg"
-          >
-            <CAvatarBadge size="1.0em" bg="green.500"/>
-          </CAvatar>
-          <CAvatar
-            name="Segun Adebayo"
-            alt="Segun Adebayo"
-            src="https://pbs.twimg.com/profile_images/1169353373012897802/skPUWd6e_400x400.jpg"
-          >
-            <CAvatarBadge size="1.0em" bg="green.500"/>
-          </CAvatar>
-          <CAvatar src="pop">
-            <CAvatarBadge size="1.0em" border-color="papayawhip" bg="tomato"/>
-          </CAvatar>
-        </CAvatarGroup>
-        <CButton
-          left-icon="close"
-          variant-color="red"
-          mt="3"
-          @click="showModal = true"
-        >Delete Account</CButton>
-        <CModal :is-open="showModal">
-          <CModalOverlay/>
-          <CModalContent>
-            <CModalHeader>Are you sure?</CModalHeader>
-            <CModalBody>Deleting user cannot be undone</CModalBody>
-            <CModalFooter>
-              <CButton @click="showModal = false">Cancel</CButton>
-              <CButton margin-left="3" variant-color="red" @click="showModal = false">Delete User</CButton>
-            </CModalFooter>
-            <CModalCloseButton @click="showModal = false"/>
-          </CModalContent>
-        </CModal>
-      </CFlex>
-    </CBox>
-  </main-layout>
+      </CBox>
+    </div>
+  </transition>
 </template>
 
 <script>
-import MainLayout from './layouts/Main.vue';
 import {
   CBox,
-  CButton,
-  CAvatarGroup,
-  CAvatar,
-  CAvatarBadge,
-  CModal,
-  CModalContent,
-  CModalOverlay,
-  CModalHeader,
-  CModalFooter,
-  CModalBody,
-  CModalCloseButton,
-  CIconButton,
-  CFlex,
-  CHeading,
-} from "@chakra-ui/vue";
+} from '@chakra-ui/vue';
+import Navbar from './components/Navbar.vue';
 
 export default {
-  name: "App",
-  inject: ["$chakraColorMode", "$toggleColorMode"],
+  name: 'App',
+  inject: ['$chakraColorMode', '$toggleColorMode'],
   components: {
-    MainLayout,
+    Navbar,
     CBox,
-    CButton,
-    CAvatarGroup,
-    CAvatar,
-    CAvatarBadge,
-    CModal,
-    CModalContent,
-    CModalOverlay,
-    CModalHeader,
-    CModalFooter,
-    CModalBody,
-    CModalCloseButton,
-    CIconButton,
-    CFlex,
-    CHeading,
   },
   data() {
     return {
-      showModal: false,
-      mainStyles: {
-        dark: {
-          bg: "gray.700",
-          color: "whiteAlpha.900"
-        },
-        light: {
-          bg: "white",
-          color: "gray.900"
-        }
-      }
+      transitionName: 'fade',
     };
   },
   computed: {
     colorMode() {
       return this.$chakraColorMode();
     },
-    theme() {
-      return this.$chakraTheme();
-    },
-    toggleColorMode() {
-      return this.$toggleColorMode;
-    }
   },
-  methods: {
-    showToast() {
-      this.$toast({
-        title: "Account created.",
-        description: "We've created your account for you.",
-        status: "success",
-        duration: 10000,
-        isClosable: true
-      });
-    }
-  }
 };
 </script>
+
+<style>
+  .fade-enter-active,
+  .fade-leave-active {
+    transition-duration: 0.3s;
+    transition-property: opacity;
+    transition-timing-function: ease;
+  }
+
+  .fade-enter,
+  .face-leave-active {
+    opacity: 0;
+  }
+</style>

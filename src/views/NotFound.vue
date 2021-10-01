@@ -21,8 +21,8 @@ export default {
     CHeading,
     CBox,
     CFlex,
-  }
-}
+  },
+};
 </script>
 
 <style>
