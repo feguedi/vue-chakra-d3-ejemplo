@@ -1,19 +1,28 @@
 <template>
-  <transition mode="out-in" name="fade">
-    <div class="container">
+  <c-box h="100vh" w="100wh" flex-dir="column">
+    <Navbar />
+    <transition mode="out-in" name="fade">
       <CBox
         font-family="body"
         as="main"
         :bg="colorMode === 'light' ? 'white' : 'gray.800'"
         :color="colorMode === 'light' ? 'gray.800' : 'gray.50'"
       >
-        <Navbar />
-        <CBox as="main" :px="[4, 10, '12rem']" :bg="'red'">
-            <router-view/>
+        <CBox
+          as="main"
+          d="flex"
+          flex-dir="column"
+          align-items="center"
+          align-content="center"
+          justify-content="center"
+          min-height="90vh"
+          min-width="90vw"
+        >
+          <router-view/>
         </CBox>
       </CBox>
-    </div>
-  </transition>
+    </transition>
+  </c-box>
 </template>
 
 <script>
@@ -24,7 +33,7 @@ import Navbar from './components/Navbar.vue';
 
 export default {
   name: 'App',
-  inject: ['$chakraColorMode', '$toggleColorMode'],
+  inject: ['$chakraColorMode'],
   components: {
     Navbar,
     CBox,
@@ -38,6 +47,10 @@ export default {
     colorMode() {
       return this.$chakraColorMode();
     },
+  },
+  mounted() {
+    console.log('App.vue montado');
+    console.log(`colorMode: ${this.$chakraColorMode}`);
   },
 };
 </script>

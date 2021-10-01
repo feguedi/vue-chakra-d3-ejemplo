@@ -5,20 +5,34 @@
     px="4"
     d="flex"
     align-items="center"
+    justify-content="space-between"
     shadow="sm"
-    :bg="'cyan'"
   >
-    <CBadge
-      variant-color="vue"
-      variant="solid"
-      font-size="0.9em"
-      ml="2"
-      font-family="mono"
-      rounded="md"
-      text-transform="lowercase"
-    >
-      D3
-    </CBadge>
+    <CLink to="/" as="router-link">
+      <CBadge
+        variant-color="vue"
+        variant="solid"
+        font-size="0.9em"
+        ml="2"
+        font-family="mono"
+        rounded="md"
+        text-transform="uppercase"
+      >
+        D3
+      </CBadge>
+    </CLink>
+    <CLink to="/arbol" as="router-link">
+      <CHeading
+        font-size="0.9em"
+        ml="2"
+        font-family="mono"
+        rounded="md"
+        :color="colorMode === 'light' ? 'gray.800' : 'whiteAlpha.900'"
+        text-transform="lowercase"
+      >
+        Árbol
+      </CHeading>
+    </CLink>
     <CBox
       as="ul"
       :color="colorMode === 'light' ? 'gray.500' : 'whiteAlpha.900'"
@@ -49,6 +63,8 @@ import {
   CBox,
   CIconButton,
   CBadge,
+  CHeading,
+  CLink,
 } from '@chakra-ui/vue';
 
 export default {
@@ -58,6 +74,8 @@ export default {
     CBox,
     CBadge,
     CIconButton,
+    CHeading,
+    CLink,
   },
   computed: {
     colorMode() {
@@ -68,7 +86,7 @@ export default {
     },
     toggleColorMode() {
       console.log('========================');
-      console.log('Demando camriar el color');
+      console.log('Demando cambiar el color');
       console.log('========================');
       return this.$toggleColorMode;
     },

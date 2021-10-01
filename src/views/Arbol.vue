@@ -1,5 +1,5 @@
 <template>
-  <CFlex>
+  <CFlex flex-dir="column">
     <CBox>
       <CHeading as="h2">Mi árbol de gráficas</CHeading>
     </CBox>
@@ -21,7 +21,7 @@ export default {
     CHeading,
   },
   mounted() {
-    console.log('Montado');
+    console.log('Arbol.vue montado');
   },
 };
 </script>

@@ -2,10 +2,10 @@
   <CBox
     v-bind="mainStyles[colorMode]"
     d="flex"
-    w="100vw"
-    h="100vh"
     flex-dir="column"
     justify-content="center"
+    min-height="80vh"
+    min-width="80vw"
   >
     <CHeading textAlign="center" mb="4">⚡️ Hello chakra-ui/vue</CHeading>
     <CFlex justify="center" direction="column" align="center">
@@ -13,7 +13,7 @@
         <CIconButton
           mr="3"
           :icon="colorMode === 'light' ? 'moon' : 'sun'"
-          @click="$toggleColorMode"
+          @click="toggleColorMode"
           :aria-label="`Switch to ${colorMode === 'light' ? 'dark' : 'light'} mode`"
         />
         <CButton left-icon="info" variant-color="blue" @click="showToast">Show Toast</CButton>
@@ -126,12 +126,13 @@ export default {
     colorMode() {
       return this.$chakraColorMode();
     },
-    // theme() {
-    //   return this.$chakraTheme();
-    // },
-    // toggleColorMode() {
-    //   return this.$toggleColorMode();
-    // },
+    theme() {
+      return this.$chakraTheme();
+    },
+    toggleColorMode() {
+      console.log(`Cambiando tema: ${this.colorMode}`);
+      return this.$toggleColorMode;
+    },
   },
   methods: {
     showToast() {
